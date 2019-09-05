@@ -1,4 +1,4 @@
 export default {
-  ENV: 'devp',
+  ENV: 'prod'
   REQ_HOST: '',
 };
