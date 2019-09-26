@@ -1,5 +1,7 @@
-import * as dateUtils from './data.js';
+import * as dateUtils from './date.js';
 
-const utils = {};
+const utils = {
+  ...dateUtils,
+};
 
 export default utils;

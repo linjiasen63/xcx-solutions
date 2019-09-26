@@ -5,7 +5,7 @@ export const promisify = function (fn) {
         var args = Array.prototype.slice.call(arguments);
         args[0] = args[0] || {};
         const fnConfig = args[0];
-        return new Promise(function (resolve) {
+        return new Promise(function (resolve, reject) {
             fnConfig.success = function (result) {
                 resolve(result);
             };

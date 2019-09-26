@@ -10,7 +10,7 @@ const constant = {
   REQ_PATH_PREFIX: '',
 };
 
-switch(EVN) {
+switch (ENV) {
   case 'devp': // 开发环境常量
     initDevpConstant();
   break;

@@ -37,18 +37,18 @@ export const nativeRequest = nativeHelper.requestPro;
 export const REQ_FAIL = -10000; // 请求失败
 export const REQ_NOT_NETWORK = - 10001; // 没有网络或网络速度太差
 
-export const handleError = function(err) {
+export const handleErr = function(err) {
   if (!err instanceof Error) {
     return;
   }
 
   switch(true) {
-    case err.code == REQ_FAI: // 请求失败
+    case err.code == REQ_FAIL: // 请求失败
     case err.code == REQ_NOT_NETWORK: // 网络错误
       showAlert(err.msg);
       break;
     default:
-      logger.error('前端逻辑出现', err);
+      logger.error('前端逻辑出现问题：', err);
       break;
   }
 };
@@ -80,11 +80,11 @@ export const request = function (method = 'GET', path, data, config) {
     .catch((reason) => {
       if (!reason || reason.code !== REQ_FAIL) {
         // 非服务器造成，可能是由于网络错误造成
-        err = new Error();
+        const err = new Error();
         err.code = REQ_NOT_NETWORK;
         err.msg = '请检查网络是否可用';
       }
-      logger.error('api请求发生错误：', reason);
+      // logger.error('api请求发生错误：', reason);
       throw reason;
     });
 };

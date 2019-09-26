@@ -17,7 +17,7 @@
 >
 > 如 app.json 在“开发环境”下直接使用该文件作为配置，而在“生产环境”下需要将app.json与app.prod.json进行merge得到新的app.json文件。此操作通过hook相应的动作自动执行。
 >
-> 需要合并配置文件有：config.js、app.json、project.config.prod.json
+> 需要合并配置文件有：config.js、app.json、project.config.json
 
 * **具体过程：**
 

@@ -1,17 +1,18 @@
-const device = null;
+let device = null;
 
 /**
  * @override 获取设备相关信息
  * @params isReGet 是否重新获取
  */
-export const getParams = function(isReGet = false) {
+export const getParams = function (isReGet = false, logger = console) {
   if (!isReGet && device) return device;
 
   try {
-    const info = wx.getSystemInfoSync()
-    device = info;
+    device = wx.getSystemInfoSync();
   } catch (e) {
-    return {}
+    logger.error('getSystemInfoSync fail:', e)
+    device = {};
   }
+  return device;
 };
 

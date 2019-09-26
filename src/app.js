@@ -13,7 +13,7 @@ const request = initRequest(constant, logger);
 
 const appConfig = {
   // 基础类库 ////////////////////////////////////////
-  constant: constant; // 运行环境常量（不建议修改此对象）
+  constant: constant, // 运行环境常量（不建议修改此对象）
   logger: logger, // 日志辅助工具
   request: request, // 请求辅助工具
   deviceHelper: deviceHelper, // 设备参数辅助工具
@@ -43,9 +43,9 @@ const appConfig = {
   // 初始化操作环境
   initEnv: function () {
     // 手动初始化设备信息
-    this.device = deviceHelper.getParams(); 
+    this.device = deviceHelper.getParams(true, logger); 
     // 手动初始化兼容信息
-    this.compac = compatHelper.getParams(device);
+    this.compac = compatHelper.getParams(this.device, true, logger);
   },
 
 };
