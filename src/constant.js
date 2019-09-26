@@ -1,6 +1,8 @@
-import config from './config';
+const config = require('./config.js');
 
 let { ENV, REQ_HOST } = config;
+
+console.log('config', config);
 
 const constant = {
   ENV,

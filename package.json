@@ -1,0 +1,31 @@
+{
+  "name": "xcx-solutions",
+  "version": "1.0.0",
+  "description": "> 微信小程序原生开发的解决文案（如promise化api接口、api请求错误处理等）",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linjiasen63/xcx-solutions.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linjiasen63/xcx-solutions/issues"
+  },
+  "homepage": "https://github.com/linjiasen63/xcx-solutions#readme",
+  "devDependencies": {
+    "delete": "^1.1.0",
+    "gulp": "^4.0.2",
+    "gulp-if": "^3.0.0",
+    "gulp-merge-json": "^1.3.1",
+    "gulp-strip-css-comments": "^2.0.0",
+    "through2": "^3.0.1"
+  },
+  "dependencies": {
+    "gulp-htmlmin": "^5.0.1"
+  }
+}
