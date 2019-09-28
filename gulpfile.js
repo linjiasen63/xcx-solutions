@@ -6,19 +6,29 @@ const htmlmin = require('gulp-htmlmin');
 const stripCssComments = require('gulp-strip-css-comments');
 const gulpMergeJson = require('gulp-merge-json');
 
-const configDevp = require('./src/config.js')
-const configProd = require('./src/config.prod.js');
-const fs = require('fs');
+const srcRootDir = './src/';
+const destRootDir = './dest'
+
+const configDevp = require(srcRootDir + 'config.js')
+const configProd = require(srcRootDir + 'config.prod.js');
+
+const isArr = function (arr) {
+  return Array.isArray(arr);
+};
+
+const isObj = function (obj) {
+  return obj && !isArr(obj) && typeof obj === 'object';
+};
 
 // 合并配置对象
 const mergeOptions = function(options1, options2, isCheck = true) {
-  if (isCheck && (typeof options1 != 'object' || typeof options2 != 'object')) {
+  if (isCheck && (!isObj(options1) || !isObj(options2))) {
     throw new Error('mergeOptions params must be object')
   }
 
   for (let prop in options2) {
     const val1 = options1[prop];
-    if (val1 && typeof val1 === 'object') {
+    if (isObj(val1)) {
       mergeOptions(options1[prop], options2[prop], false);
     } else {
       options1[prop] = options2[prop];
@@ -27,9 +37,10 @@ const mergeOptions = function(options1, options2, isCheck = true) {
   return options1;
 };
 
+// 配置文件
 const generateConfigFile = function(cb) {
   const config = mergeOptions(configDevp, configProd);
-  src('./src/config.js')
+  src(`${srcRootDir}config.js`)
     .pipe(through2.obj(function(file, _, cb) {
       file.contents = Buffer.from('module.exports = ' + JSON.stringify(config, null, '  '))
       cb(null, file);
@@ -38,28 +49,30 @@ const generateConfigFile = function(cb) {
   cb();
 };
 
-const appJsons = ['./src/app.json', './src/app.prod.json'];
+// 小程序应用配置文件
+const appJsons = [`${srcRootDir}app.json`, `${srcRootDir}app.prod.json`];
 const generateAppJSONFile = function(cb) {
   src(appJsons)
     .pipe(gulpMergeJson({
       fileName: 'app.json',
     }))
-    .pipe(dest('./dest'));
+    .pipe(dest(destRootDir));
   cb();
 };
 
-const projectConfigJsons = ['./src/project.config.json', './src/project.config.prod.json'];
+// 小程序项目配置文件
+const projectConfigJsons = [`${srcRootDir}project.config.json`, `${srcRootDir}project.config.prod.json`];
 const generateProjectJSONFile = function(cb) {
   src(projectConfigJsons)
     .pipe(gulpMergeJson({
       fileName: 'project.config.json',
     }))
-    .pipe(dest('./dest'));
+    .pipe(dest(destRootDir));
   cb();
 };
 
 const clean = function(cb) {
-  del('./dest');
+  del(destRootDir);
   cb();
 };
 
@@ -67,12 +80,12 @@ const clean = function(cb) {
 const ignoreFiles = [
   ...appJsons,
   ...projectConfigJsons,
-  './src/config.js',
-  './src/config.prod.js',
+  `${srcRootDir}config.js`,
+  `${srcRootDir}config.prod.js`,
 ];
 
 // 复制的文件
-const copyNoramlFiles = ['./src/**/*.*'];
+const copyNoramlFiles = [`${srcRootDir}**/*.*`];
 ignoreFiles.forEach((item) => {
   copyNoramlFiles.push('!' + item);
 });
@@ -89,9 +102,17 @@ const generateNormalFiles = function(cb) {
   src(copyNoramlFiles)
     .pipe(gulpIf(isWxmlFile, htmlmin({ collapseWhitespace: true })))
     .pipe(gulpIf(isWxssFile, stripCssComments()))
-    .pipe(dest('./dest/'));
+    .pipe(dest(destRootDir));
   cb();
 };
 
 exports.clean = clean;
-exports.prod = series(clean, parallel(generateConfigFile, generateNormalFiles, generateAppJSONFile, generateProjectJSONFile));
+exports.prod = series(
+  clean, 
+  parallel(
+    generateConfigFile,
+    generateNormalFiles, 
+    generateAppJSONFile, 
+    generateProjectJSONFile
+  )
+);

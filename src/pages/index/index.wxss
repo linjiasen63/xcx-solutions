@@ -1,4 +1,5 @@
 /* 页面样式 */
 Page {
   min-height: 100vh;
+  background: #f2f2f2;
 }
