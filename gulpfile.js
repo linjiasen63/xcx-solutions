@@ -44,7 +44,7 @@ const generateConfigFile = function(cb) {
     .pipe(through2.obj(function(file, _, cb) {
       let jsonStr = JSON.stringify(config, null, '  ');
       // 清除生成的对象属性名上的双引号
-      jsonStr = code.jsonStr(/"([^,]*?)":/g, '$1:');
+      jsonStr = jsonStr.replace(/"([^,]*?)":/g, '$1:');
 
       file.contents = Buffer.from('module.exports = ' + jsonStr)
       cb(null, file);
