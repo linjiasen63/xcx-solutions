@@ -18,7 +18,7 @@ switch (ENV) {
   break;
 
   case 'prod': // 正式环境常量
-    initDevpConstant();
+  initProdConstant();
   break;
 
   default: 
