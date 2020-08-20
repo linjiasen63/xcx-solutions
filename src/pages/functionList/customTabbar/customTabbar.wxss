@@ -1,0 +1,108 @@
+.tabbar-items {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  width: 100vw;
+  height: 49px;
+  background-color: #fff;
+}
+
+.tabbar-no-home-iphone {
+  height: 84px;
+}
+
+.tabbar-items::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  transform: scaleY(.5);
+  transform-origin: center top;
+}
+
+.tabbar-item {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabbar-item-img {
+  position: relative;
+  z-index: 999;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 6rpx;
+}
+
+.tabbar-item-img .icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.tabbar-item .icon-normal {
+  opacity: 1;
+}
+
+.tabbar-item .icon-select {
+  opacity: 0;
+}
+
+.tabbar-item-on .icon-normal {
+  opacity: 0 !important;
+}
+
+.tabbar-item-on .icon-select {
+  opacity: 1 !important;
+}
+
+.tabbar-item-img .dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background-color: #e02e24;
+  transform: translate(100%, -50%);
+}
+
+.tabbar-item-img .badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 22rpx;
+  padding: 0 10rpx;
+  line-height: 22rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background-color: #e02e24;
+  transform: translate(100%, -50%);
+}
+
+.tabbar-item-txt {
+  margin-top: 10rpx;
+  line-height: 1;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.tabbar-item-on .tabbar-item-txt {
+  color: #e02e24;
+}
+
+.page-content {
+  height: 100vh;
+  background-color: #f2f2f2;
+}

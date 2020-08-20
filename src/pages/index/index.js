@@ -1,8 +1,8 @@
 const app = getApp();
 const {
   logger,
-  request,
   utils,
+  request,
 } = app;
 
 Page({

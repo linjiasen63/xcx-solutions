@@ -1,0 +1,21 @@
+<!-- 导航栏 -->
+<navigation-bar title='{{navTil}}' background='{{navBg}}' placeholder="{{navPlaceholder}}"></navigation-bar>
+
+
+<view class="page-content"></view>
+
+<!-- tabber栏 -->
+<view class="tabbar-item {{isNoHomeIphone ? 'tabbar-no-home-iphone' : ''}}"></view>
+<!-- 固定到页面底部 -->
+<view class="tabbar-items {{isNoHomeIphone ? 'tabbar-no-home-iphone' : ''}}">
+	<view class="tabbar-item {{item.id === curTabbarItemId ? 'tabbar-item-on' : ''}}" wx:for="{{tabbarItems}}" wx:key="id" catchtap="changeTabbarItem" data-index="{{index}}">
+		<view class="tabbar-item-img">
+			<!-- 避免切换时图标首次加载时出现闪现 -->
+			<image class="icon icon-normal" mode="aspectFit" src="{{item.iconPath}}"></image>
+			<image class="icon icon-select" mode="aspectFit" src="{{item.selectedIconPath}}"></image>
+			<view class="badge" wx:if="{{item.badge}}">{{item.badge}}</view>
+			<view class="dot" wx:elif="{{item.dot}}"></view>
+		</view>
+		<view class="tabbar-item-txt">{{item.txt}}</view>
+	</view>
+</view>

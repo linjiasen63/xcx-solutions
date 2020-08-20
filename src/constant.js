@@ -1,38 +1,35 @@
 const config = require('./config.js');
 
-let { ENV, REQ_HOST } = config;
+const {
+  ENV,
+  REQ_HOST
+} = config;
 
 console.log('config', config);
 
 const constant = {
   ENV,
 
-  REQ_HOST: REQ_HOST,
-  REQ_VERSION: '',
-  REQ_PATH_PREFIX: '',
+  REQ_HOST,
 };
 
 switch (ENV) {
-  case 'devp': // 开发环境常量
+  case 'devp': // 开发环境
     initDevpConstant();
-  break;
+    break;
 
-  case 'prod': // 正式环境常量
-  initProdConstant();
-  break;
+  case 'prod': // 正式环境
+    initProdConstant();
+    break;
 
-  default: 
-  break;
+  default:
+    break;
 }
 
 function initDevpConstant() {
-  constant.REQ_VERSION = '';
-  constant.REQ_PATH_PREFIX = '';
 }
 
 function initProdConstant() {
-  constant.REQ_VERSION = '';
-  constant.REQ_PATH_PREFIX = '';
 }
 
 export default constant;

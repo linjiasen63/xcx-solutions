@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/functionList/customTabbar/customTabbar",
+    "pages/index/index",
+    "pages/functionList/functionList"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "solution",
+    "navigationBarTitleText": "整合方案",
     "navigationBarTextStyle": "black"
   },
   "sitemapLocation": "sitemap.json"

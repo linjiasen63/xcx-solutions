@@ -1,5 +1,37 @@
-/* 页面样式 */
 Page {
   min-height: 100vh;
-  background: #f2f2f2;
+  background: #fff;
+  color: #333;
+}
+
+Page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  transform: scaleY(.5);
+  transform-origin: center top;
+}
+
+.module-name {
+  position: relative;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin: 0 24rpx;
+  font-size: 30rpx;
+}
+
+.module-name::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #e0e0e0;
+  transform: scaleY(.5);
+  transform-origin: center top;
 }

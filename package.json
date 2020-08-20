@@ -1,10 +1,12 @@
 {
   "name": "xcx-solutions",
   "version": "1.0.0",
-  "description": "> 微信小程序原生开发的解决文案（如promise化api接口、api请求错误处理等）",
+  "description": "> 微信小程序原生开发整合方案",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init_devp": "cd ./src && cnpm install",
+    "build": "gulp prod && cd ./dist && cnpm install"
   },
   "repository": {
     "type": "git",

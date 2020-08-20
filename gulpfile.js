@@ -7,7 +7,7 @@ const stripCssComments = require('gulp-strip-css-comments');
 const gulpMergeJson = require('gulp-merge-json');
 
 const srcRootDir = './src/';
-const destRootDir = './dest'
+const distRootDir = './dist'
 
 const configDevp = require(srcRootDir + 'config.js')
 const configProd = require(srcRootDir + 'config.prod.js');
@@ -49,7 +49,7 @@ const generateConfigFile = function(cb) {
       file.contents = Buffer.from('module.exports = ' + jsonStr)
       cb(null, file);
     }))
-    .pipe(dest('dest/'));
+    .pipe(dest(distRootDir));
   cb();
 };
 
@@ -60,7 +60,7 @@ const generateAppJSONFile = function(cb) {
     .pipe(gulpMergeJson({
       fileName: 'app.json',
     }))
-    .pipe(dest(destRootDir));
+    .pipe(dest(distRootDir));
   cb();
 };
 
@@ -71,12 +71,12 @@ const generateProjectJSONFile = function(cb) {
     .pipe(gulpMergeJson({
       fileName: 'project.config.json',
     }))
-    .pipe(dest(destRootDir));
+    .pipe(dest(distRootDir));
   cb();
 };
 
 const clean = function(cb) {
-  del(destRootDir);
+  del(distRootDir);
   cb();
 };
 
@@ -106,12 +106,12 @@ const generateNormalFiles = function(cb) {
   src(copyNoramlFiles)
     .pipe(gulpIf(isWxmlFile, htmlmin({ collapseWhitespace: true })))
     .pipe(gulpIf(isWxssFile, stripCssComments()))
-    .pipe(dest(destRootDir));
+    .pipe(dest(distRootDir));
   cb();
 };
 
 exports.clean = clean;
-exports.prod = series(
+const buildProd = series(
   clean, 
   parallel(
     generateConfigFile,
@@ -120,3 +120,5 @@ exports.prod = series(
     generateNormalFiles
   )
 );
+exports.default = buildProd;
+exports.prod = buildProd;
